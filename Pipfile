@@ -1,0 +1,23 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+flake8 = "*"
+
+[packages]
+flask = "*"
+alembic = "*"
+sqlalchemy = "*"
+graphene = "*"
+flask-script = "*"
+flask-sqlalchemy = "*"
+marshmallow = "*"
+psycopg2-binary = "*"
+python-dotenv = "*"
+graphene-sqlalchemy = "*"
+flask-graphql = "*"
+
+[requires]
+python_version = "3.7"

@@ -1,0 +1,11 @@
+## lock file
+Pipfile.lock
+
+## hidden files & folders
+.editorconfig
+.env
+.vscode/
+.DS_Store
+
+## folders
+__pycache__/
