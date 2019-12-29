@@ -3,9 +3,10 @@ from sqlalchemy import (Column, Sequence, BIGINT, String,
 from sqlalchemy.orm import relationship
 
 from src.helpers.database import Base
+from src.utils.utility import Utility
 
 
-class Payment(Base):
+class Payment(Base, Utility):
     __tablename__ = 'payments'
 
     no = Column(String, Sequence('pay_no', start=1, increment=1),
@@ -16,11 +17,3 @@ class Payment(Base):
     item = Column(String, ForeignKey('arts.no'), nullable=False)
     owner = Column(BIGINT, ForeignKey('users.user_id'), nullable=False)
     art = relationship("Art")
-
-    def __init__(self, **kwargs):
-        self.no = kwargs['no']
-        self.amount = kwargs['amount']
-        self.payment_method = kwargs['payment_method']
-        self.transfer_no = kwargs['transfer_no']
-        self.item = kwargs['item']
-        self.owner = kwargs['owner']

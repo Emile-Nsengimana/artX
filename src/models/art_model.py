@@ -1,10 +1,13 @@
 from sqlalchemy import Column, String, BIGINT, Text, Float, ForeignKey
 from sqlalchemy.orm import relationship
 
+from src.models.payment_model import Payment
+from src.models.category_model import Category
 from src.helpers.database import Base
+from src.utils.utility import Utility
 
 
-class Art(Base):
+class Art(Base, Utility):
     __tablename__ = 'arts'
     no = Column(String, primary_key=True)
     label = Column(String, nullable=False)
@@ -14,15 +17,5 @@ class Art(Base):
     owner = Column(BIGINT, ForeignKey('users.user_id'), nullable=False)
     category = Column(String, ForeignKey('category.no'), nullable=False)
     status = Column(String, nullable=False, default='available')
-    payment = relationship('payment', uselist=False)
+    payment = relationship('Payment', uselist=False)
     category = relationship('Category', uselist=False)
-
-    def __init__(self, **kwargs):
-        self.no = kwargs['no']
-        self.category = kwargs['category']
-        self.label = kwargs['label']
-        self.image = kwargs['image']
-        self.details = kwargs['details']
-        self.status = kwargs['status']
-        self.price = kwargs['price']
-        self.owner = kwargs['owner']
