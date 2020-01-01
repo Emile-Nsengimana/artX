@@ -18,6 +18,10 @@ class UserQuery(graphene.ObjectType):
                           user_id=graphene.Int(required=True),
                           description='''Returns a specif user details by
                                           user_id(National ID)''')
+    user_by_username = graphene.Field(User,
+                                      username=graphene.String(required=True),
+                                      description='''Returns a specif user details by
+                                          username''')
 
     def resolve_users(self, info):
         _users = UserModal.query.all()
@@ -32,3 +36,10 @@ class UserQuery(graphene.ObjectType):
         if not _user:
             GraphQLError('user not found')
         return _user
+
+    def resolve_user_by_username(self, info, username):
+        user = UserModal.query.filter_by(username=username).first()
+
+        if not user:
+            raise GraphQLError(f'{username} not found')
+        return user
