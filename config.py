@@ -1,5 +1,7 @@
 import os
 
+basedir = os.path.abspath(os.path.dirname(__file__))
+
 
 class Config:
 
@@ -14,7 +16,7 @@ class Development(Config):
 
 
 class Testing(Config):
-    DATABASE_URL = os.getenv('DATABASE_URL')
+    DATABASE_URL = 'sqlite:///' + os.path.join(basedir, 'test-db.sqlite')
 
 
 config = {

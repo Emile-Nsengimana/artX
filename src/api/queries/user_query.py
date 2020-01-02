@@ -34,7 +34,7 @@ class UserQuery(graphene.ObjectType):
         _user = UserModal.query.filter_by(user_id=user_id).first()
 
         if not _user:
-            GraphQLError('user not found')
+            raise GraphQLError('user not found')
         return _user
 
     def resolve_user_by_username(self, info, username):

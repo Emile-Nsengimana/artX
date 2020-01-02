@@ -16,7 +16,7 @@ basedir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 database_url = ''
 if os.getenv('APP_ENV') == 'testing':
-    database_url = os.getenv('DATABASE_URL')
+    database_url = 'sqlite:///' + os.path.join(basedir, 'test-db.sqlite')
 elif os.getenv('APP_ENV') == 'development':
     database_url = os.getenv('DATABASE_URL')
 elif os.getenv('APP_ENV') == 'production':

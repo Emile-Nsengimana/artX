@@ -29,22 +29,22 @@ class User(Base, Utility):
     art = relationship("Art")
     payment = relationship("Payment")
 
-    def __init__(self, **kwargs):
-        self.user_id = kwargs['user_id']
-        self.first_name = kwargs['first_name']
-        self.last_name = kwargs['last_name']
-        self.username = kwargs['username']
-        self.email = kwargs['email']
-        self.dob = kwargs['dob']
-        self.role = kwargs['role']
-        self.phone_no = kwargs['phone_no']
-        self.country = kwargs['country']
-        self.status = kwargs['status']
-        self.city = kwargs['city']
-        self.street_no = kwargs['street_no']
-        self.post_code = kwargs['post_code']
-        self.password = kwargs['password']
-        self.is_admin = kwargs['is_admin']
+    # def __init__(self, **kwargs):
+    #     self.user_id = kwargs['user_id']
+    #     self.first_name = kwargs['first_name']
+    #     self.last_name = kwargs['last_name']
+    #     self.username = kwargs['username']
+    #     self.email = kwargs['email']
+    #     self.dob = kwargs['dob']
+    #     self.role = kwargs['role']
+    #     self.phone_no = kwargs['phone_no']
+    #     self.country = kwargs['country']
+    #     self.status = kwargs['status']
+    #     self.city = kwargs['city']
+    #     self.street_no = kwargs['street_no']
+    #     self.post_code = kwargs['post_code']
+    #     self.password = kwargs['password']
+    #     self.is_admin = kwargs['is_admin']
 
     @staticmethod
     def save_user(**kwargs):

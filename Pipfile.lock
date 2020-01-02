@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "045d5ae8dbcdbbd3ff8fabaa0f4cfd9bb8a8f019e9f0a3324914eb6b642ba642"
+            "sha256": "35f97ab53b0db3e038313d26b6106d26ed765f7269786b2953182d83d77c52e2"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -29,6 +29,13 @@
                 "sha256:d10a4bf949f619f719b227ef5386e31f49a2b6d453004b21f02661ccc8670c7b"
             ],
             "version": "==7.0.0"
+        },
+        "cerberus": {
+            "hashes": [
+                "sha256:302e6694f206dd85cb63f13fd5025b31ab6d38c99c50c6d769f8fa0b0f299589"
+            ],
+            "index": "pypi",
+            "version": "==1.3.2"
         },
         "click": {
             "hashes": [
@@ -66,6 +73,13 @@
             ],
             "index": "pypi",
             "version": "==2.4.1"
+        },
+        "flask-testing": {
+            "hashes": [
+                "sha256:dc076623d7d850653a018cb64f500948334c8aeb6b10a5a842bf1bcfb98122bc"
+            ],
+            "index": "pypi",
+            "version": "==0.7.1"
         },
         "graphene": {
             "hashes": [
@@ -207,6 +221,14 @@
             ],
             "index": "pypi",
             "version": "==2.8.4"
+        },
+        "pyjwt": {
+            "hashes": [
+                "sha256:5c6eca3c2940464d106b99ba83b00c6add741c9becaec087fb7ccdefea71350e",
+                "sha256:8d59a976fb773f3e6a39c85636357c4f0e242707394cadadd9814f5cbaa20e96"
+            ],
+            "index": "pypi",
+            "version": "==1.7.1"
         },
         "python-dateutil": {
             "hashes": [

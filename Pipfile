@@ -19,6 +19,9 @@ psycopg2-binary = "*"
 python-dotenv = "*"
 graphene-sqlalchemy = "*"
 flask-graphql = "*"
+cerberus = "*"
+flask-testing = "*"
+pyjwt = "*"
 
 [requires]
 python_version = "3.7"
