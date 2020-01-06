@@ -1,6 +1,7 @@
 import jwt
 import os
 
+from datetime import datetime, timedelta
 from functools import wraps
 from graphql import GraphQLError
 from flask import request
@@ -17,7 +18,9 @@ class Authentication:
     #    token: string
     def generate_token(payload):
         try:
+            payload['exp'] = datetime.utcnow() + timedelta(seconds=900)
             token = jwt.encode(payload, key, 'HS256')
+
             return token
 
         except Exception as error:

@@ -27,7 +27,6 @@ config.set_main_option('sqlalchemy.url', database_url)
 from src.helpers.database import Base
 from src.models.user_model import User
 from src.models.art_model import Art
-from src.models.category_model import Category
 from src.models.payment_model import Payment
 
 target_metadata = Base.metadata

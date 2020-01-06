@@ -1,7 +1,7 @@
 import graphene
 
 from graphql import GraphQLError
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from src.models.user_model import User as UserModal
 from src.api.queries.user_query import User
@@ -33,8 +33,11 @@ class CreateUser(graphene.Mutation):
 
     def mutate(self, info, **kwargs):
         Validate.user_info(**kwargs)
+
+        # password encryption
         kwargs['password'] = generate_password_hash(kwargs['password'])
         user = UserModal.save_user(**kwargs)
+
         token = Authentication.generate_token({
             'user_id': kwargs['user_id'],
             'username': kwargs['username'],
@@ -43,6 +46,38 @@ class CreateUser(graphene.Mutation):
             'email': kwargs['email'],
             'role': kwargs['role']
         })
+
         if type(user) == str:
             raise GraphQLError(user)
+
         return CreateUser(user=user, token=token)
+
+
+class Login(graphene.Mutation):
+    user = graphene.Field(User)
+    token = graphene.String()
+
+    class Arguments:
+        email = graphene.String(required=True)
+        password = graphene.String(required=True)
+
+    def mutate(self, info, **kwargs):
+        _user = UserModal.query.filter_by(email=kwargs['email']).first()
+
+        if not _user:
+            raise GraphQLError('email not found')
+
+        password = check_password_hash(_user.password, kwargs['password'])
+        if not password:
+            raise GraphQLError('incorrect password')
+
+        token = Authentication.generate_token({
+            'user_id': _user.user_id,
+            'username': _user.username,
+            'first_name': _user.first_name,
+            'last_name': _user.last_name,
+            'email': _user.email,
+            'role': _user.role
+        })
+
+        return Login(user=_user, token=token)
