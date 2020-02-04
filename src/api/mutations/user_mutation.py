@@ -19,13 +19,13 @@ class CreateUser(graphene.Mutation):
         last_name = graphene.String()
         username = graphene.String()
         email = graphene.String()
-        dob = graphene.Date(description='User date of birth. \
-                                        \neg: 1900-01-01')
-        role = graphene.String(description='''User role \
-                              \neg: System admin, Customer or System user ''')
+        dob = graphene.Date(description='\
+                                        \n eg: 1900-01-01')
+        role = graphene.String(description='''\
+                              \n eg: System admin, Customer or System user ''')
         phone_no = graphene.String(description='Telephone Number')
         country = graphene.String(description='Country of origin')
-        status = graphene.String(description='State or country province')
+        status = graphene.String(description='\n eg: active or deactivated')
         city = graphene.String()
         street_no = graphene.String(description='Street Number')
         post_code = graphene.String()

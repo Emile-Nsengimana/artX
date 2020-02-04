@@ -22,6 +22,7 @@ flask-graphql = "*"
 cerberus = "*"
 flask-testing = "*"
 pyjwt = "*"
+flask-cors = "*"
 
 [requires]
 python_version = "3.7"

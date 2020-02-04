@@ -1,5 +1,6 @@
 import graphene
 
+from sqlalchemy.sql.expression import func
 from graphene_sqlalchemy import SQLAlchemyObjectType
 from graphql import GraphQLError
 
@@ -26,7 +27,7 @@ class ArtQuery(graphene.ObjectType):
         return _art
 
     def resolve_arts(self, info):
-        _arts = ArtModal.query.filter_by(status='Available').all()
+        _arts = ArtModal.query.all()
 
         if not _arts:
             raise GraphQLError('no art found')
