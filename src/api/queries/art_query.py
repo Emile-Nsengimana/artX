@@ -1,6 +1,5 @@
 import graphene
 
-from sqlalchemy.sql.expression import func
 from graphene_sqlalchemy import SQLAlchemyObjectType
 from graphql import GraphQLError
 

@@ -6,6 +6,7 @@ from src.helpers.database import Base
 from src.helpers.database import db_session
 from src.models.art_model import Art
 from src.models.payment_model import Payment
+from src.models.art_order_model import Order
 from src.utils.utility import Utility
 
 
@@ -28,6 +29,7 @@ class User(Base, Utility):
     is_admin = Column(Boolean, default=False)
     art = relationship("Art")
     payment = relationship("Payment")
+    order = relationship("Order")
 
     @staticmethod
     def save_user(**kwargs):

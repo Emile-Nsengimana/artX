@@ -51,33 +51,3 @@ class CreateUser(graphene.Mutation):
             raise GraphQLError(user)
 
         return CreateUser(user=user, token=token)
-
-
-class Login(graphene.Mutation):
-    user = graphene.Field(User)
-    token = graphene.String()
-
-    class Arguments:
-        email = graphene.String(required=True)
-        password = graphene.String(required=True)
-
-    def mutate(self, info, **kwargs):
-        _user = UserModal.query.filter_by(email=kwargs['email']).first()
-
-        if not _user:
-            raise GraphQLError('email not found')
-
-        password = check_password_hash(_user.password, kwargs['password'])
-        if not password:
-            raise GraphQLError('incorrect password')
-
-        token = Authentication.generate_token({
-            'user_id': _user.user_id,
-            'username': _user.username,
-            'first_name': _user.first_name,
-            'last_name': _user.last_name,
-            'email': _user.email,
-            'role': _user.role
-        })
-
-        return Login(user=_user, token=token)

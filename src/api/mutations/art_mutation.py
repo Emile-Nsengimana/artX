@@ -20,7 +20,8 @@ class RegisterArt(graphene.Mutation):
         owner = graphene.String()
         category = graphene.String(description='''\
                               \neg: 'painting', 'drawing', 'photography', 'digital graphics' ''')
-        status = graphene.String()
+        status = graphene.String(description='''\
+                              \neg: available, sold ''')
 
     def mutate(self, info, **kwargs):
         Validate.art_info(**kwargs)
