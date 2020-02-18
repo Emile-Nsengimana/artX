@@ -14,19 +14,19 @@ class User(SQLAlchemyObjectType):
         interfaces = (graphene.relay.Node,)
 
 
-class UserQuery(graphene.ObjectType):
-
-    class Arguments:
-        email = graphene.String()
-        password = graphene.String()
-
-    users = graphene.List(User, description='Returns a list of all users')
-    authentication = graphene.Field(User,
-                                    email=graphene.String(required=True),
-                                    password=graphene.String(required=True),
-                                    description="User created by this mutation.")
+class Auth(graphene.ObjectType):
+    user = graphene.Field(User)
     token = graphene.String()
+
+
+class UserQuery(graphene.ObjectType):
+    users = graphene.List(User, description='Returns a list of all users')
+    authentication = graphene.Field(Auth,
+                                    email=graphene.String(required=True),
+                                    password=graphene.String(required=True))
+
     user = graphene.Field(User,
+                          token=graphene.String(),
                           user_id=graphene.Int(required=True),
                           description='''Returns a specif user details by
                                           user_id(National ID)''')
@@ -54,7 +54,7 @@ class UserQuery(graphene.ObjectType):
 
         if not user:
             raise GraphQLError(f'{username} not found')
-        return user
+        return user(user=user, token="12345")
 
     def resolve_authentication(self, info, **kwargs):
         _user = UserModal.query.filter_by(email=kwargs['email']).first()
@@ -72,7 +72,7 @@ class UserQuery(graphene.ObjectType):
             'first_name': _user.first_name,
             'last_name': _user.last_name,
             'email': _user.email,
-            'role': _user.role
+            'role': _user.role,
         })
 
-        return _user(user=_user, token=token)
+        return Auth(user=_user, token=token)
